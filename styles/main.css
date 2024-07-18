@@ -14,7 +14,7 @@ body {
   display: grid;
   grid-template-columns: 120px 1fr;
   grid-template-rows: auto auto;
-  column-gap: 80px;
+  column-gap: 5rem;
 
   header {
     /* background-color: blueviolet; */
@@ -27,24 +27,32 @@ body {
     grid-column: 2 / 3;
     grid-template-columns: 1fr 400px;
     border: 2px dotted red;
-    column-gap: 80px;
+    column-gap: 5rem;
 
     .col1 {
       border: 2px solid salmon;
       /* height: 100%; */
-      padding: 40px;
+      padding: 2.5rem;
 
       display: flex;
       flex-direction: column;
       align-content: flex-end;
       justify-content: space-between;
+
+      textarea {
+        font-size: 2rem;
+        border: none;
+        background-color: transparent;
+        resize: none;
+      }
     }
 
     .col2 {
       background-color: white;
-      padding: 40px;
+      padding: 2rem;
       display: grid;
       place-items: center;
+      border-radius: 2rem;
 
       .empty-message {
         text-align: center;
