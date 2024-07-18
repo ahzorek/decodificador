@@ -1,17 +1,69 @@
 :root {
   /* blue theme */
-  --blue-400: blue;
+  --blue-100: hsla(208, 57.4%, 60.4%, 1);
+  --blue-200: hsla(211, 52.3%, 43.5%, 1);
+  --blue-300: hsla(213, 83.7%, 24.1%, 1);
+  --blue-400: hsla(216, 86.5%, 20.4%, 1);
+  --blue-500: hsla(219, 88.4%, 16.9%, 1);
 
-  /* pink theme */
-  --pink-400: pink;
+  /* Pink Theme */
+  --pink-100: hsla(340, 85.2%, 92.2%, 1);
+  --pink-200: hsla(343, 80.1%, 82.4%, 1);
+  --pink-300: hsla(346, 98.6%, 69.8%, 1);
+  --pink-400: hsla(349, 100%, 57.3%, 1);
+  --pink-500: hsla(352, 100%, 44.7%, 1);
 
-  /* yellow theme */
-  --yellow-400: yellow;
+  /* Purple Theme */
+  --purple-100: hsla(270, 66.5%, 92.2%, 1);
+  --purple-200: hsla(273, 61.4%, 82.4%, 1);
+  --purple-300: hsla(276, 79.7%, 69.8%, 1);
+  --purple-400: hsla(279, 82.5%, 57.3%, 1);
+  --purple-500: hsla(282, 84.4%, 44.7%, 1);
 
-  /* gray/mono theme */
-  --gray-400: gray;
+  /* Red Theme */
+  --red-100: hsla(0, 74.1%, 92.2%, 1);
+  --red-200: hsla(3, 69.1%, 82.4%, 1);
+  --red-300: hsla(6, 86.7%, 69.8%, 1);
+  --red-400: hsla(9, 89.5%, 57.3%, 1);
+  --red-500: hsla(12, 91.4%, 44.7%, 1);
+
+  /* Yellow Theme */
+  --yellow-100: hsla(50, 92.5%, 92.2%, 1);
+  --yellow-200: hsla(53, 87.4%, 82.4%, 1);
+  --yellow-300: hsla(56, 100%, 69.8%, 1);
+  --yellow-400: hsla(59, 100%, 57.3%, 1);
+  --yellow-500: hsla(62, 100%, 44.7%, 1);
 
   /* light mode */
+  --light-background: hsl(0, 0%, 94%);
+  --light-background-lighter: hsla(0, 0%, 100%, 0.6);
+  --light-background-darker: hsl(0, 0%, 84%);
 
-  /*  dark mode */
+  /* dark mode */
+  --dark-background: hsl(0, 0%, 7%);
+  --dark-background-lighter: hsl(0, 0%, 17%, 5%);
+  --dark-background-darker: hsl(0, 0%, 2%);
+}
+
+.light {
+  --background: var(--light-background);
+  --foreground: var(--light-background-lighter);
+}
+
+.dark {
+  --background: var(--dark-background-darker);
+  --foreground: var(--dark-background);
+}
+
+.pink {
+  --primary: var(--pink-400);
+  --secondary: var(--pink-500);
+}
+.blue {
+  --primary: var(--blue-300);
+  --secondary: var(var(--blue-400));
+}
+.yellow {
+  --primary: var(--yellow-400);
+  --secondary: var(var(--yellow-500));
 }

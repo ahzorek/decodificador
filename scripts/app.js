@@ -12,4 +12,9 @@ textInput.addEventListener("input", () => {
   }
 })
 
-criptografarBtn.addEventListener("click", () => console.log("hello"))
+criptografarBtn.addEventListener("click", () => {
+  const result = document.createElement("p")
+  result.innerText = textInput.value + " alterado"
+  output.innerHTML = ""
+  output.appendChild(result)
+})
