@@ -7,11 +7,12 @@ html {
   /* background-color: orchid; */
 }
 body {
-  height: 100%;
+  height: calc(100% - 80px);
   margin-inline: 40px;
+  padding-block: 40px;
   background-color: beige;
   display: grid;
-  grid-template-columns: 120px 1fr auto;
+  grid-template-columns: 120px 1fr;
   grid-template-rows: auto auto;
   column-gap: 80px;
 
@@ -24,7 +25,7 @@ body {
     display: grid;
     grid-row: 1 / -1;
     grid-column: 2 / 3;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 400px;
     border: 2px dotted red;
     column-gap: 80px;
 
