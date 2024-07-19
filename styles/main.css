@@ -11,11 +11,7 @@ body {
   position: relative;
   height: calc(100% - 80px);
   margin: 40px;
-  background-color: color-mix(
-    in srgb,
-    var(--background) 90%,
-    var(--primary) 10%
-  );
+  background-color: var(--background);
   display: grid;
   grid-template-columns: 120px 1fr;
   grid-template-rows: auto auto;
@@ -32,23 +28,28 @@ body {
     column-gap: 5rem;
 
     .col1 {
-      padding: 2.5rem;
-
       display: flex;
       flex-direction: column;
-      align-content: flex-end;
       justify-content: space-between;
+      padding: 2rem;
 
       textarea::placeholder {
         color: color-mix(in srgb, var(--primary) 40%, white 0%);
       }
 
       textarea {
+        padding: 0.5rem;
         color: var(--primary);
         font-size: 2rem;
         border: none;
         background-color: transparent;
         resize: none;
+      }
+      textarea:active,
+      textarea:focus,
+      textarea:focus-within {
+        outline: none;
+        background-color: color-mix(in srgb, currentColor 5%, white 0%);
       }
 
       .button-wrapper {
@@ -61,20 +62,22 @@ body {
       }
     }
     .col2 {
-      background-color: color-mix(
-        in srgb,
-        var(--foreground) 98%,
-        var(--primary) 2%
-      );
+      background-color: var(--foreground);
       padding: 2rem;
       border-radius: 2rem;
       box-shadow: 0px 24px 24px rgb(0 0 0 / 0.08);
 
       .output {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         height: 100%;
         text-align: left;
         > p {
+          font-weight: 300;
           font-size: 1.5rem;
+          line-height: 150%;
+          color: color-mix(in oklab, color percentage, color percentage);
         }
       }
 
@@ -104,8 +107,18 @@ body {
   font-size: 1rem;
 }
 
+.button:disabled {
+  opacity: 70%;
+  filter: saturate(50%);
+}
+
 .button.primary {
   background-color: var(--primary);
-  border: 2px solid var(--secondary);
-  color: var(--light-background-lighter);
+  color: color-mix(in oklab, white 90%, var(--primary) 10%);
+}
+
+.button.secondary {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }

@@ -45,25 +45,74 @@
   --dark-background-darker: hsl(0, 0%, 2%);
 }
 
+.pink {
+  --c100: var(--pink-100);
+  --c200: var(--pink-200);
+  --c300: var(--pink-300);
+  --c400: var(--pink-400);
+  --c500: var(--pink-500);
+}
+.blue {
+  --c100: var(--blue-100);
+  --c200: var(--blue-200);
+  --c300: var(--blue-300);
+  --c400: var(--blue-400);
+  --c500: var(--blue-500);
+}
+.yellow {
+  --c100: var(--yellow-100);
+  --c200: var(--yellow-200);
+  --c300: var(--yellow-300);
+  --c400: var(--yellow-400);
+  --c500: var(--yellow-500);
+}
+
+.purple {
+  --c100: var(--purple-100);
+  --c200: var(--purple-200);
+  --c300: var(--purple-300);
+  --c400: var(--purple-400);
+  --c500: var(--purple-500);
+}
+
+.red {
+  --c100: var(--red-100);
+  --c200: var(--red-200);
+  --c300: var(--red-300);
+  --c400: var(--red-400);
+  --c500: var(--red-500);
+}
+
 .light {
-  --background: var(--light-background);
-  --foreground: var(--light-background-lighter);
+  /* --background: var(--light-background); */
+  --background: color-mix(
+    in oklab,
+    var(--light-background-lighter) 80%,
+    var(--c300) 20%
+  );
+  --foreground: color-mix(
+    in oklab,
+    var(--light-background-lighter) 92%,
+    var(--c100) 8%
+  );
+  color: color-mix(in oklab, black 90%, var(--c100) 10%);
+  --primary: var(--c400);
+  --secondary: var(--c500);
 }
 
 .dark {
-  --background: var(--dark-background-darker);
-  --foreground: var(--dark-background);
-}
-
-.pink {
-  --primary: var(--pink-400);
-  --secondary: var(--pink-500);
-}
-.blue {
-  --primary: var(--blue-300);
-  --secondary: var(var(--blue-400));
-}
-.yellow {
-  --primary: var(--yellow-400);
-  --secondary: var(var(--yellow-500));
+  /* --background: var(--light-background); */
+  --background: color-mix(
+    in oklab,
+    var(--dark-background-darker) 90%,
+    var(--c200) 10%
+  );
+  --foreground: color-mix(
+    in oklab,
+    var(--dark-background-darker) 98%,
+    var(--c300) 2%
+  );
+  color: color-mix(in oklab, white 90%, var(--c100) 10%);
+  --primary: var(--c300);
+  --secondary: var(--c100);
 }
