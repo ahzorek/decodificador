@@ -133,7 +133,8 @@ function addWarning() {
   }, 850)
 }
 
-//if char is uppercase return true
 function charNotAllowed(char) {
   return (char >= "à" && char <= "ÿ") || (char >= "À" && char <= "ß")
 }
+
+// funcionalidade definir tema de cores e modo escuro ou claro
