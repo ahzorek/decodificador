@@ -1,4 +1,5 @@
 @import "./colors.css";
+@import "./animations.css";
 
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -18,6 +19,16 @@ body {
   column-gap: 5rem;
 
   header {
+    display: flex;
+    justify-content: center;
+    /* border: dashed 2px red; */
+    .logo > svg {
+      width: 4rem;
+      fill: var(--primary);
+    }
+    .title {
+      display: none;
+    }
   }
 
   main {
@@ -32,6 +43,7 @@ body {
       flex-direction: column;
       justify-content: space-between;
       padding: 2rem;
+      row-gap: 1.25rem;
 
       textarea::placeholder {
         color: color-mix(in srgb, var(--primary) 40%, white 0%);
@@ -50,6 +62,27 @@ body {
       textarea:focus-within {
         outline: none;
         background-color: color-mix(in srgb, currentColor 5%, white 0%);
+      }
+
+      .alert {
+        color: var(--primary);
+        fill: var(--primary);
+        display: flex;
+        gap: 0.25rem;
+        margin-block-start: auto;
+        font-size: 0.75rem;
+        opacity: 0.7;
+        align-items: center;
+      }
+
+      .triggered {
+        color: red;
+        fill: red;
+        animation: shake 0.5s ease-in-out;
+      }
+
+      .alert > svg {
+        width: 1rem;
       }
 
       .button-wrapper {
@@ -78,6 +111,7 @@ body {
           font-size: 1.5rem;
           line-height: 150%;
           color: color-mix(in oklab, color percentage, color percentage);
+          word-break: break-word;
         }
       }
 
