@@ -2,7 +2,7 @@ const textAreaInput = document.querySelector("textarea")
 const buttons = document.querySelectorAll(".action")
 const criptografarBtn = document.querySelector(".primary")
 const decriptografarBtn = document.querySelector(".secondary")
-const outputWrapper = document.querySelector(".output")
+const outputWrapper = document.querySelector(".output_slot")
 
 //funcionalidade principal
 textAreaInput.addEventListener("input", (e) => {
@@ -44,7 +44,6 @@ function createResultElement(value) {
 }
 
 // cria botão para funcionalidade copiar texto (refatorar mais tarde)
-
 function createCopyBtn(value) {
   const btn = document.createElement("button")
   btn.innerText = "Copiar"
@@ -59,7 +58,6 @@ function createCopyBtn(value) {
 }
 
 // verifica campo texto e altera estado dos botoes(ativando ou desativando)
-
 function toggleButtonState(currentInput) {
   const state = Boolean(currentInput)
   buttons.forEach((button) => (button.disabled = !state))
@@ -121,7 +119,6 @@ function clearInput() {
 }
 
 // alerta quando digitado caractere "não permitido"
-
 const warning = document.querySelector(".alert")
 
 function addWarning() {
@@ -137,16 +134,12 @@ function charNotAllowed(char) {
 
 // funcionalidade definir tema de cores e modo escuro ou claro
 const HTML = document.documentElement
-const WRAPPER_THEME_BUTTONS_DEV = document.querySelector(".theme-buttons")
+const SLOT_SETTINGS = document.querySelector(".settings-slot")
 const LOCAL_STORAGE_KEY = "__mode_theme"
 const THEMES = ["blue", "pink", "purple", "red"]
-const MODES = ["dark", "light"]
 const overlay = document.querySelector(".overlay")
 const settingsButton = document.querySelector(".settings")
-
-settingsButton.addEventListener("click", () => {
-  overlay.style.display = "flex"
-})
+let settingsOpen = false
 
 // inicializando
 document.addEventListener("DOMContentLoaded", () => {
@@ -154,83 +147,119 @@ document.addEventListener("DOMContentLoaded", () => {
   setupButtons()
 })
 
+settingsButton.addEventListener("click", openSettingsPanel)
+
 function setupButtons() {
-  //  botões de temas
-  THEMES.forEach((theme) => {
-    const themeBtn = document.createElement("button")
-    themeBtn.innerText = theme
-    themeBtn.dataset.theme = theme
-    themeBtn.addEventListener("click", handleThemeChange)
-    WRAPPER_THEME_BUTTONS_DEV.appendChild(themeBtn)
+  const frag = document.createDocumentFragment()
+
+  const darkModeSetting = document.createElement("span")
+  darkModeSetting.classList.add("dark-mode-setting")
+
+  const darkModeLabel = document.createElement("label")
+  darkModeLabel.innerText = "Modo Escuro"
+
+  darkModeSetting.appendChild(darkModeLabel)
+
+  const darkModeToggleCheckbox = document.createElement("input")
+  darkModeToggleCheckbox.classList.add("switch")
+  darkModeToggleCheckbox.setAttribute("type", "checkbox")
+  if (!!isDarkModeActive()) darkModeToggleCheckbox.setAttribute("checked", true)
+  // console.log("darkmode is:   ", !!isDarkModeActive())
+  darkModeToggleCheckbox.addEventListener("change", toggleDarkMode)
+
+  darkModeSetting.appendChild(darkModeToggleCheckbox)
+
+  frag.appendChild(darkModeSetting)
+
+  // botões de temas
+  const btnWrapper = document.createElement("div")
+  const colorLabel = document.createElement("label")
+  colorLabel.innerText = "Cores"
+  btnWrapper.classList.add("btn-theme-wrapper")
+
+  THEMES.forEach((theme, index) => {
+    const themeInput = document.createElement("input")
+    themeInput.type = "radio"
+    themeInput.name = "theme"
+    themeInput.id = `theme-${theme}`
+    themeInput.value = theme
+    themeInput.dataset.theme = theme
+    themeInput.checked = theme === getCurrentTheme()
+    themeInput.addEventListener("change", handleThemeChange)
+
+    const themeLabel = document.createElement("label")
+    themeLabel.htmlFor = themeInput.id
+    themeLabel.classList.add(themeInput.id)
+
+    btnWrapper.appendChild(themeInput)
+    btnWrapper.appendChild(themeLabel)
   })
 
-  //  botões de modos (eventualmente transformar num toggle entra claro escuro)
-  MODES.forEach((mode) => {
-    const modeBtn = document.createElement("button")
-    modeBtn.innerText = mode
-    modeBtn.dataset.mode = mode
-    modeBtn.addEventListener("click", handleModeChange)
-    WRAPPER_THEME_BUTTONS_DEV.appendChild(modeBtn)
-  })
+  frag.appendChild(colorLabel)
+  frag.appendChild(btnWrapper)
+  SLOT_SETTINGS.appendChild(frag)
 }
 
 function handleThemeChange(event) {
-  const newTheme = event.target.dataset.theme
-  setTheme(newTheme)
+  setTheme(event.target.dataset.theme)
 }
 
-function handleModeChange(event) {
-  const newMode = event.target.dataset.mode
-  setMode(newMode)
-}
-
-function getCurrentMode() {
-  return HTML.classList[0]
+function isDarkModeActive() {
+  return Boolean(HTML.dataset.darkmode === "true")
 }
 
 function getCurrentTheme() {
-  return HTML.classList[1]
+  return HTML.dataset.theme
 }
 
 function setTheme(theme) {
-  const currentTheme = getCurrentTheme()
-  if (currentTheme) {
-    HTML.classList.replace(currentTheme, theme)
-  } else {
-    HTML.classList.add(theme)
-  }
+  HTML.setAttribute("data-theme", theme)
   saveModeTheme()
 }
 
-function setMode(mode) {
-  const currentMode = getCurrentMode()
-  if (currentMode) {
-    HTML.classList.replace(currentMode, mode)
-  } else {
-    HTML.classList.add(mode)
-  }
+function toggleDarkMode() {
+  HTML.setAttribute("data-darkmode", !isDarkModeActive())
   saveModeTheme()
 }
 
 function saveModeTheme() {
-  const currentModeTheme = `${getCurrentMode()} ${getCurrentTheme()}`
+  const currentModeTheme = JSON.stringify({
+    theme: getCurrentTheme(),
+    isDarkMode: isDarkModeActive(),
+  })
   localStorage.setItem(LOCAL_STORAGE_KEY, currentModeTheme)
 }
 
 function loadModeTheme() {
-  const savedModeTheme = localStorage.getItem(LOCAL_STORAGE_KEY)
+  const savedSettings = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
 
-  if (savedModeTheme) {
-    HTML.className = savedModeTheme
+  if (savedSettings) {
+    HTML.setAttribute("data-darkmode", savedSettings.isDarkMode)
+    HTML.setAttribute("data-theme", savedSettings.theme)
   } else {
     // verifica a preferencia de esquema de cores do sistema
-    const prefersDarkScheme = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches
-    const defaultMode = prefersDarkScheme ? "dark" : "light"
-    const defaultTheme = "blue" //usando azul da alura como padrão :)
+    const prefersDarkScheme =
+      window.matchMedia("(prefers-color-scheme: dark)").matches ?? false
+    HTML.setAttribute("data-darkmode", prefersDarkScheme)
+    HTML.setAttribute("data-theme", "blue") //usando azul da alura como padrão :)
 
-    HTML.className = `${defaultMode} ${defaultTheme}`
     saveModeTheme()
+  }
+}
+
+function toggleSettingsPanel() {
+  settingsOpen = !settingsOpen
+  overlay.style.display = settingsOpen ? "flex" : "none"
+}
+
+function openSettingsPanel() {
+  toggleSettingsPanel()
+  overlay.addEventListener("click", closeSettingsPanel, true)
+}
+
+function closeSettingsPanel(event) {
+  if (event.target === overlay) {
+    toggleSettingsPanel()
+    overlay.removeEventListener("click", closeSettingsPanel, true)
   }
 }

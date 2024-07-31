@@ -1,7 +1,6 @@
 @import "./colors.css";
 @import "./animations.css";
-@import "./themes.css";
-@import "./overlay.css";
+@import "./settings.css";
 
 * {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -23,7 +22,6 @@ body {
   header {
     display: flex;
     justify-content: center;
-    /* border: dashed 2px red; */
     .logo > svg {
       width: 4rem;
       fill: var(--primary);
@@ -37,7 +35,7 @@ body {
     grid-template-columns: 1fr 400px;
     column-gap: 5rem;
 
-    .col1 {
+    .input_section {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -94,13 +92,13 @@ body {
         flex: 1;
       }
     }
-    .col2 {
+    .output_section {
       background-color: var(--foreground);
       padding: 2rem;
       border-radius: 2rem;
       box-shadow: 0px 24px 24px rgb(0 0 0 / 0.08);
 
-      .output {
+      .output_slot {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -110,18 +108,20 @@ body {
           font-weight: 300;
           font-size: 1.5rem;
           line-height: 150%;
-          color: color-mix(in oklab, color percentage, color percentage);
           word-break: break-word;
         }
       }
 
       .empty-message {
-        /* border: 2px dashed hotpink; */
         display: flex;
         flex-direction: column;
         justify-content: center;
         height: 100%;
         text-align: center;
+      }
+      .empty-message .illustration svg {
+        max-width: 336px;
+        fill: var(--primary);
       }
     }
   }
@@ -148,15 +148,4 @@ body {
   background-color: transparent;
   border: 2px solid var(--primary);
   color: var(--primary);
-}
-
-.sr-only {
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  margin: -1px;
 }
