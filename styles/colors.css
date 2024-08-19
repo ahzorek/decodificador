@@ -1,5 +1,5 @@
 :root {
-  --hue: 256.67; /* azul padrão */
+  --hue: 256.67; /* azul padrão, baseado no da alura */
   --chroma: 0.11; /* chroma base para o azul */
 
   --base-lightness: 84%;
@@ -15,16 +15,8 @@
   --color-400: oklch(var(--lightness-400) var(--chroma) var(--hue));
   --color-500: oklch(var(--lightness-500) var(--chroma) var(--hue));
 
-  --light-background: hsl(0, 0%, 94%);
-  --light-background-lighter: hsla(0, 0%, 100%, 0.6);
-  --light-background-darker: hsl(0, 0%, 84%);
-
-  --dark-background: hsl(0, 0%, 7%);
-  --dark-background-lighter: hsl(0, 0%, 17%, 5%);
-  --dark-background-darker: hsl(0, 0%, 2%);
-
   --background: oklch(95% 0.03 var(--hue));
-  --foreground: oklch(97% 0.01 var(--hue));
+  --foreground: oklch(97% 0.015 var(--hue));
 
   --primary: var(--color-300);
   --secondary: var(--color-500);

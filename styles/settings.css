@@ -38,7 +38,7 @@
   border-radius: 2rem;
   padding: 2rem;
   row-gap: 2rem;
-  background-color: oklch(var(--base-lightness) 0.02 var(--hue));
+  background-color: var(--foreground);
 }
 
 .dark-mode-setting {
