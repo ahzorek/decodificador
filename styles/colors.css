@@ -1,125 +1,71 @@
 :root {
-  /* blue theme */
-  --blue-100: hsla(208, 57.4%, 60.4%, 1);
-  --blue-200: hsla(211, 52.3%, 43.5%, 1);
-  --blue-300: hsla(213, 83.7%, 24.1%, 1);
-  --blue-400: hsla(216, 86.5%, 20.4%, 1);
-  --blue-500: hsla(219, 88.4%, 16.9%, 1);
+  --hue: 256.67; /* azul padrão */
+  --chroma: 0.11; /* chroma base para o azul */
 
-  /* Pink Theme */
-  --pink-100: hsla(340, 85.2%, 92.2%, 1);
-  --pink-200: hsla(343, 80.1%, 82.4%, 1);
-  --pink-300: hsla(346, 98.6%, 69.8%, 1);
-  --pink-400: hsla(349, 100%, 57.3%, 1);
-  --pink-500: hsla(352, 100%, 44.7%, 1);
+  --base-lightness: 84%;
+  --lightness-500: 14.7%;
+  --lightness-400: 24.7%;
+  --lightness-300: 34.7%;
+  --lightness-200: 44.7%;
+  --lightness-100: 54.7%;
 
-  /* Purple Theme */
-  --purple-100: hsla(270, 66.5%, 92.2%, 1);
-  --purple-200: hsla(273, 61.4%, 82.4%, 1);
-  --purple-300: hsla(276, 79.7%, 69.8%, 1);
-  --purple-400: hsla(279, 82.5%, 57.3%, 1);
-  --purple-500: hsla(282, 84.4%, 44.7%, 1);
+  --color-100: oklch(var(--lightness-100) var(--chroma) var(--hue));
+  --color-200: oklch(var(--lightness-200) var(--chroma) var(--hue));
+  --color-300: oklch(var(--lightness-300) var(--chroma) var(--hue));
+  --color-400: oklch(var(--lightness-400) var(--chroma) var(--hue));
+  --color-500: oklch(var(--lightness-500) var(--chroma) var(--hue));
 
-  /* Red Theme */
-  --red-100: hsla(0, 74.1%, 92.2%, 1);
-  --red-200: hsla(3, 69.1%, 82.4%, 1);
-  --red-300: hsla(6, 86.7%, 69.8%, 1);
-  --red-400: hsla(9, 89.5%, 57.3%, 1);
-  --red-500: hsla(12, 91.4%, 44.7%, 1);
-
-  /* Yellow Theme */
-  --yellow-100: hsla(50, 92.5%, 92.2%, 1);
-  --yellow-200: hsla(53, 87.4%, 82.4%, 1);
-  --yellow-300: hsla(56, 100%, 69.8%, 1);
-  --yellow-400: hsla(59, 100%, 57.3%, 1);
-  --yellow-500: hsla(62, 100%, 44.7%, 1);
-
-  /* light mode */
   --light-background: hsl(0, 0%, 94%);
   --light-background-lighter: hsla(0, 0%, 100%, 0.6);
   --light-background-darker: hsl(0, 0%, 84%);
 
-  /* dark mode */
   --dark-background: hsl(0, 0%, 7%);
   --dark-background-lighter: hsl(0, 0%, 17%, 5%);
   --dark-background-darker: hsl(0, 0%, 2%);
+
+  --background: oklch(95% 0.03 var(--hue));
+  --foreground: oklch(97% 0.01 var(--hue));
+
+  --primary: var(--color-300);
+  --secondary: var(--color-500);
+  --contrast-color: oklch(2% 0.06 var(--hue));
+
+  color: var(--contrast-color);
 }
 
 :root[data-theme="pink"] {
-  --c100: var(--pink-100);
-  --c200: var(--pink-200);
-  --c300: var(--pink-300);
-  --c400: var(--pink-400);
-  --c500: var(--pink-500);
+  --hue: -7;
+  --chroma: 0.69;
 }
 
 :root[data-theme="blue"] {
-  --c100: var(--blue-100);
-  --c200: var(--blue-200);
-  --c300: var(--blue-300);
-  --c400: var(--blue-400);
-  --c500: var(--blue-500);
-}
-:root[data-theme="yellow"] {
-  --c100: var(--yellow-100);
-  --c200: var(--yellow-200);
-  --c300: var(--yellow-300);
-  --c400: var(--yellow-400);
-  --c500: var(--yellow-500);
+  --hue: 256.67;
+  --chroma: 0.11;
 }
 
 :root[data-theme="purple"] {
-  --c100: var(--purple-100);
-  --c200: var(--purple-200);
-  --c300: var(--purple-300);
-  --c400: var(--purple-400);
-  --c500: var(--purple-500);
+  --hue: 323;
+  --chroma: 0.22;
 }
 
 :root[data-theme="red"] {
-  --c100: var(--red-100);
-  --c200: var(--red-200);
-  --c300: var(--red-300);
-  --c400: var(--red-400);
-  --c500: var(--red-500);
-}
-
-:root {
-  transition: all ease-in-out 200ms;
-  /* --background: var(--light-background); */
-  --solid: white;
-
-  --background: color-mix(
-    in oklab,
-    var(--light-background-lighter) 80%,
-    var(--c300) 20%
-  );
-  --foreground: color-mix(
-    in oklab,
-    var(--light-background-lighter) 92%,
-    var(--c100) 8%
-  );
-  color: color-mix(in oklab, black 90%, var(--c100) 10%);
-  --primary: var(--c400);
-  --secondary: var(--c500);
+  --hue: 5.66;
+  --chroma: 0.39;
 }
 
 :root[data-darkmode="true"] {
-  /* --background: var(--light-background); */
-  --solid: black;
-  --background: color-mix(
-    in oklab,
-    var(--dark-background-darker) 90%,
-    var(--c200) 10%
-  );
+  --base-lightness: 18%;
+  --lightness-500: 24.7%;
+  --lightness-400: 34.7%;
+  --lightness-300: 44.7%;
+  --lightness-200: 54.7%;
+  --lightness-100: 64.7%;
+  --background: oklch(18% 0.02 var(--hue));
+  --foreground: oklch(22% 0.03 var(--hue));
 
-  --foreground: color-mix(
-    in oklab,
-    var(--dark-background-darker) 98%,
-    var(--c300) 2%
-  );
+  --primary: var(--color-400);
+  --secondary: var(--color-200);
+  --contrast-color: oklch(90% 0.08 var(--hue));
 
-  color: color-mix(in oklab, white 90%, var(--c100) 10%);
-  --primary: var(--c300);
-  --secondary: var(--c200);
+  color: var(--contrast-color);
 }
